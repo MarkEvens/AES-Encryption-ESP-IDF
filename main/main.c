@@ -18,7 +18,7 @@ void encrypt_string(const char *input, uint8_t *key, uint8_t *iv) {
 void encrypt_any_length_string(const char *input, uint8_t *key, uint8_t *iv) {
   int padded_input_len = 0;
   int input_len = strlen(input) + 1;
-  int module16 = input_len % 16;
+  int modulo16 = input_len % 16;
 
   if (input_len < 16)
     padded_input_len = 16;
@@ -31,7 +31,7 @@ void encrypt_any_length_string(const char *input, uint8_t *key, uint8_t *iv) {
     return;
   }
   memcpy(padded_input, input, strlen(input));
-  uint8_t pkc5_value = (17 - module16);
+  uint8_t pkc5_value = (17 - modulo16);
   for (int i = strlen(input); i < padded_input_len; i++) {
     padded_input[i] = pkc5_value;
   }
